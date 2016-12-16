@@ -3,8 +3,8 @@
 import threading  # Ejercicio 1
 import time  # Ejercicio 1
 import json  # Ejercicio 2
-import sys  # Ejercicio 3
 from datetime import datetime  # Ejercicio 3
+import argparse  # Ejercicio 3
 
 '''
 Trabajo Practico numero 3
@@ -70,22 +70,28 @@ def function1(a, b):
 # Ejercicio 3 ----------
 
 
-if __name__ == "__main__":
-    if sys.argv[1] != '--from':
-        print('--from ir required')
-        exit(0)
-    try:
-        f = datetime.strptime(sys.argv[2], '%Y-%m-%dT%H:%M:%S.%f')
-    except:
-        print('Fail from DATE format')
-        exit(0)
-    if sys.argv[3] != '--to':
-        print('--to ir required')
-        exit(0)
-    try:
-        t = datetime.strptime(sys.argv[4], '%Y-%m-%dT%H:%M:%S.%f')
-    except:
-        print('Fail to DATE format')
-        exit(0)
+def main():
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--from",
+        dest='DATE',
+        action='append',
+        required=True)
+
+    parser.add_argument(
+        "--to",
+        dest='DATE',
+        action='append',
+        required=True)
+
+    args = parser.parse_args()
+    (f, t) = args.DATE
+
+    f = datetime.strptime(f, '%Y-%m-%dT%H:%M:%S.%f')
+    t = datetime.strptime(t, '%Y-%m-%dT%H:%M:%S.%f')
     print('Diferencia: -{}.{} secs.'
           .format((t-f).seconds, (t-f).microseconds))
+
+if __name__ == "__main__":
+    main()
