@@ -17,7 +17,6 @@ class TestGroupofPeople(unittest.TestCase):
         self.p0 = MagicMock(spec=Person)
         self.p1 = MagicMock(spec=Person)
         self.p2 = MagicMock(spec=Person)
-        print(self.p0)
 
     def test_new2(self):
         self.group0 = Group([self.p0, self.p1])
@@ -60,8 +59,6 @@ class TestGroupofPeople(unittest.TestCase):
         self.group1 = Group([self.p0, self.p2])
         self.group2 = self.group0 - self.group1
         self.assertItemsEqual(self.group2, [self.p1])
-
-# iterables
 
     def test_len(self):
         self.group0 = Group([self.p0, self.p1])
